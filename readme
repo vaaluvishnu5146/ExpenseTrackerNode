@@ -68,3 +68,14 @@ purpose
 medium
 amount
 type - Credit or Debit
+
+Account:
+id
+firstname
+lastname
+email
+contactnumber
+password (Hashed)
+subscription
+createdAt
+updatedAt

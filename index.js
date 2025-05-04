@@ -1,7 +1,16 @@
 // Import dependencies
 const Express = require("express");
+require("./db");
+const PurposeRouter = require("./modules/purpose/purpose.controller");
+const MediumRouter = require("./modules/medium/medium.controller");
+const ExpenseRouter = require("./modules/transactions/expense.controller");
+
 // Create HTTP server
 const HTTPServer = Express();
+
+// Middlewares
+HTTPServer.use(Express.json());
+
 // Start ad listen to the incoming request
 HTTPServer.listen(3000, "localhost", (error) => {
     if(error) {
@@ -10,6 +19,11 @@ HTTPServer.listen(3000, "localhost", (error) => {
         console.log("Server started")
     }
 })
+
+// Inject Routers to Server
+HTTPServer.use("/v1/purpose", PurposeRouter);
+HTTPServer.use("/v1/medium", MediumRouter);
+HTTPServer.use("/v1/expense", ExpenseRouter);
 
 /**
  * Path = http://localhost:3000/

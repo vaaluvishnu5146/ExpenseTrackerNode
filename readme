@@ -1,0 +1,70 @@
+Expense Tracker:
+Application that let us to track the expenses and Savings and
+credits of every user of the Application
+
+Users:
+Anyone who can signup into the application can able to track his or her expenses.
+
+Features 1:
+1. Track Expense
+2. Track credits
+3. Track Expense Type
+4. Track Credit Type
+5. Track payment type
+
+Expense Purpose:
+1. Food
+2. Entertainment
+3. Shopping
+4. Eating out
+5. Gifts
+6. Gas/Fuel
+7. EMI/Loan
+8. Miscillaneous
+
+Note: This should be stored in the DB
+
+Expense/Credit Medium:
+1. Bank Transaction 
+2. UPI
+3. Credit Card
+4. Cash
+5. Cashback
+
+Note: This should be stored in the DB
+
+Database Designing:
+
+DB Type:
+MongoDB
+
+DB Entities:
+1. UserAccount
+2. Transaction
+3. Purpose
+4. Medium
+
+Schema Design:
+
+Purpose:
+id
+title
+description
+createdAt
+updateAt
+
+Medium:
+id
+title
+description
+createdAt
+updateAt
+
+Expense:
+id
+title
+description
+purpose
+medium
+amount
+type - Credit or Debit

@@ -1,3 +1,4 @@
+const { decodedToken } = require("../../utils");
 const ExpenseModel = require("./expense.model");
 const m = require('mongoose');
 
@@ -37,7 +38,60 @@ async function fetchAllExpenses(req, res, next) {
     }
 }
 
+async function updateAExpenseById(req, res, next) {
+    try {
+        const { expenseId } = req.params;
+
+        if(!expenseId) {
+            return res.status(400).json({
+                success: false,
+                message: "Expense id is missing"
+            });
+        }
+
+        const token = decodedToken(req.headers['authorization']);
+
+        if(!token) {
+            return res.status(401).json({
+                success: false,
+                message: "Un authorized access"
+            });
+        }
+
+        console.log(expenseId, token.uId);
+
+        const response = await ExpenseModel.findOneAndUpdate({ _id: new m.Types.ObjectId(expenseId), user: new m.Types.ObjectId(token.uId) }, req.body, { new: true });
+
+        if(!response) {
+            return res.status(400).json({
+                success: false,
+                error: "Unauthorized access",
+            });
+        }
+
+        return res.status(201).json({
+            success: true,
+            message: "Expense updated successfully",
+            result: response
+        });
+
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Something went wrong",
+            error
+        });
+    }
+}
+
+async function deleteAExpenseById() {
+    
+}
+
+
 module.exports = {
     createAExpense,
-    fetchAllExpenses
+    fetchAllExpenses,
+    updateAExpenseById
 };

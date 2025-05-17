@@ -8,7 +8,12 @@ function createSignedToken(payload) {
     });
 }
 
+function decodedToken(payload) {
+    return jwt.decode(payload);
+}
+
 module.exports = {
     createSignedToken,
-    SECRET_KEY
+    SECRET_KEY,
+    decodedToken
 };

@@ -2,9 +2,9 @@ const PurposeModel = require("./purpose.model");
 
 // Get all the pupose
 async function getAllPurpose(req, res, next) {
-    // const Purpose = new PurposeModel();
+    const { purposeId } = req.params;
     try {
-        const result = await PurposeModel.find();
+        const result = await PurposeModel.find(purposeId? { _id: purposeId } : {});
         return res.status(200).json({
             success: true,
             message: "Purpose fetched successfully",

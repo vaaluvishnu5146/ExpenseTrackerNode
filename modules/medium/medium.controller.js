@@ -9,6 +9,6 @@ MediumRouter.get('/', getAllMedium);
 // Create a medium
 MediumRouter.post('/create', checkUserIsAdmin, createAMedium);
 // Update a medium
-// Delet a medium
+// Delete a medium
 
 module.exports = MediumRouter;

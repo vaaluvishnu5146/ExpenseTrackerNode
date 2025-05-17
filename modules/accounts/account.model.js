@@ -19,7 +19,8 @@ const AccountSchema = m.Schema({
     address: {
         type: [address],
         default: []
-    }
+    },
+    role: { type: String, enum: ["admin", "user"], default: "user" }
 }, { timestamps: true });
 
 const AccountModel = m.model('accounts', AccountSchema);

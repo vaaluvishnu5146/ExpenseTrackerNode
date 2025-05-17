@@ -38,7 +38,59 @@ async function createAPurpose(req, res, next) {
     }
 }
 
+// Update a purppose
+async function updateAPurpose(req, res, next) {
+    try {
+        const { purposeId } = req.params;
+        if(!purposeId) {
+            return res.status(400).json({
+                success: false,
+                message: "Purpose Id is missing"
+            })
+        }
+        const response = await PurposeModel.findOneAndUpdate({ _id: purposeId }, req.body, { new: true });
+        return res.status(201).json({
+            success: true,
+            message: "Response update successfully",
+            result: response
+        })
+    } catch (error) {
+        return res.status(500).json({
+                success: false,
+                message: "Something went wrong",
+                error
+            })
+    }
+}
+
+// Delete a purpose
+async function deleteAPurpose(req, res, next) {
+    try {
+        const { purposeId } = req.params;
+        if(!purposeId) {
+            return res.status(400).json({
+                success: false,
+                message: "Purpose Id is missing"
+            })
+        }
+        const response = await PurposeModel.findOneAndDelete({ _id: purposeId });
+        return res.status(201).json({
+            success: true,
+            message: "Response deleted successfully",
+            result: response
+        })
+    } catch (error) {
+        return res.status(500).json({
+                success: false,
+                message: "Something went wrong",
+                error
+            })
+    }
+}
+
 module.exports = {
     getAllPurpose,
-    createAPurpose
+    createAPurpose,
+    updateAPurpose,
+    deleteAPurpose
 };

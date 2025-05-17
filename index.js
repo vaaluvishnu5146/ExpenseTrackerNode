@@ -5,6 +5,7 @@ const PurposeRouter = require("./modules/purpose/purpose.controller");
 const MediumRouter = require("./modules/medium/medium.controller");
 const ExpenseRouter = require("./modules/transactions/expense.controller");
 const AuthenticationRouter = require("./modules/accounts/authentication.controller");
+const { checkTokenValid } = require("./middlewares/AuthMiddleware");
 
 
 // Create HTTP server
@@ -23,9 +24,9 @@ HTTPServer.listen(3000, "localhost", (error) => {
 })
 
 // Inject Routers to Server
-HTTPServer.use("/v1/purpose", PurposeRouter);
-HTTPServer.use("/v1/medium", MediumRouter);
-HTTPServer.use("/v1/expense", ExpenseRouter);
+HTTPServer.use("/v1/purpose", checkTokenValid, PurposeRouter);
+HTTPServer.use("/v1/medium", checkTokenValid, MediumRouter);
+HTTPServer.use("/v1/expense", checkTokenValid, ExpenseRouter);
 HTTPServer.use("/v1/authentication", AuthenticationRouter);
 
 
